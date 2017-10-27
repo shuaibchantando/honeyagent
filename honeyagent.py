@@ -68,7 +68,7 @@ class HoneyAgent(multiprocessing.Process):
     def getNetworkUsage(self):
         netjsons = []
 
-        for x in os.listdir('/sys/class/net/'):
+        for x in os.popen('ip link ls up | grep BROADCAST | cut -d: -f2').read().split():
             if len(x) < 8:
                 if not x in ["sit0","lo"]:
                     try:
